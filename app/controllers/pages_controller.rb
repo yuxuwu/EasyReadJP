@@ -18,15 +18,15 @@ class PagesController < ApplicationController
     def print_score
         puts case params[:average]
             when 0.0..4.9
-                @comment = "<div>Seems easy! Even an N5 vocab level should be enough!</div>".html_safe
+                @comment = "<div>Seems easy! Even an <b>N5</b> vocab level should be enough!</div>".html_safe
             when 5.0..24.9
-                @comment = "<div>This shouldn't be too hard. An N4 vocabulary will get you through it!</div>".html_safe
+                @comment = "<div>This shouldn't be too hard. An <b>N4</b> vocabulary will get you through it!</div>".html_safe
             when 25.0..49.9
-                @comment = "<div>A bit more difficult. You'll want to study some N3 terms to fully understand this.</div>".html_safe
+                @comment = "<div>A bit more difficult. You'll want to study some <b>N3</b> terms to fully understand this.</div>".html_safe
             when 50.0..74.9
-                @comment = "<div>This one's a challenge. Readers will need N2 vocabulary.</div>".html_safe
+                @comment = "<div>This one's a challenge. Readers will need <b>N2</b> vocabulary.</div>".html_safe
             when 75.0..100.0
-                @comment = "<div>This is for experienced students only. N1 vocabulary is needed to read this.</div>".html_safe
+                @comment = "<div>This is for experienced students only. <b>N1</b> vocabulary is needed to read this.</div>".html_safe
         end
         
         @average_score = "<div>#{params[:average]}%</div>".html_safe
@@ -50,7 +50,7 @@ class PagesController < ApplicationController
             end
         end
         
-        25.times do |n|
+        100.times do |n|
             char_uni = kanjiCharacters[n]
             url_string = URI::encode(char_uni)
             jisho_page = Nokogiri::HTML(open("http://jisho.org/search/#{url_string}%23kanji"))
