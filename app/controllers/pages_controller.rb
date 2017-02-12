@@ -21,16 +21,19 @@ class PagesController < ApplicationController
         @link = params[:link]
         all_data = Nokogiri::HTML(open("#{@link}"))
         all_data_text = all_data.xpath("//text()").text
-        puts all_data_text
         puts "ended scraping"
         
         #Create a new array of all kanji characters
         kanjiCharacters = Array.new
-        all_data_text.each_char do |c|
-            
-            kanjiCharacters.insert("#{@c}")
+        all_data_text.split('').each do |c|
+            c = c.ord
+#            puts c
+            if(c >= 0x4e00 && c<= 0x9faf)
+#                puts "Comparison success"
+                kanjiCharacters.push(c)
+            end
         end
-        
+        puts kanjiCharacters.length
         
     end
     
