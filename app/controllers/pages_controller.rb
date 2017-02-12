@@ -71,7 +71,7 @@ class PagesController < ApplicationController
         end
         average_score = (jlpt_sum.to_f/2000) * 100
         puts average_score
-        params[:average] = average_score
+        params[:average] = average_score.to_i
         
         self.print_score
     end
