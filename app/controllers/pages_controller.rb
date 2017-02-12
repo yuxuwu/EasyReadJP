@@ -15,6 +15,9 @@ class PagesController < ApplicationController
         params.require(:link).permit(:url)
     end
     
+    def print_score
+    end
+    
     def getURLText
         
         jlpt_sum = 0;
@@ -40,9 +43,12 @@ class PagesController < ApplicationController
             jisho_page = Nokogiri::HTML(open("http://jisho.org/search/#{url_string}%23kanji"))
             jlpt = jisho_page.css('.jlpt>strong').text
             jlpt_level = jlpt[1]
-            jlpt_sum = jlpt_sum + jlpt_level
+            jlpt_sum = jlpt_sum + jlpt_level.to_f
         end
+        average_score = (jlpt_sum/500) * 100
+        puts average_score
+        params[:average] = average_score
         
+        self.print_score
     end
-    
 end
