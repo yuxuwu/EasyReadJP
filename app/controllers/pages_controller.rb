@@ -16,6 +16,20 @@ class PagesController < ApplicationController
     end
     
     def print_score
+        puts case params[:average]
+            when 0.0..4.9
+                @comment = "<div>Seems easy! Even an N5 vocab level should be enough!</div>".html_safe
+            when 5.0..24.9
+                @comment = "<div>This shouldn't be too hard. An N4 vocabulary will get you through it!</div>".html_safe
+            when 25.0..49.9
+                @comment = "<div>A bit more difficult. You'll want to study some N3 terms to fully understand this.</div>".html_safe
+            when 50.0..74.9
+                @comment = "<div>This one's a challenge. Readers will need N2 vocabulary.</div>".html_safe
+            when 75.0..100.0
+                @comment = "<div>This is for experienced students only. N1 vocabulary is needed to read this.</div>".html_safe
+        end
+        
+        @average_score = "<div>#{params[:average]}%</div>".html_safe
     end
     
     def getURLText
@@ -28,14 +42,13 @@ class PagesController < ApplicationController
         all_data_text = all_data.xpath("//text()").text
         puts "ended scraping"
         
-        #Create a new array of all kanji characters
+        #Create a new array of all kanji charactersruby html
         kanjiCharacters = Array.new
         all_data_text.split('').each do |c|
             if(c.ord >= 0x4e00 && c.ord <= 0x9faf)
                 kanjiCharacters.push(c)
             end
         end
-        puts kanjiCharacters.length
         
         25.times do |n|
             char_uni = kanjiCharacters[n]
