@@ -1,27 +1,29 @@
-<div class="home_callout text-center container-fluid">
-    <h1>Welcome to EasyRead!</h1>
-</div>
-
-<div class="container">
-    <div class="row">
-        <h3 class="text-center">Your JLPT resource for web articles.</h3>
-            <!-- URL Form submission -->
-            <div class="well">
-                    <%= form_tag(:action => "getURLText") do %>
-                        <div class="form-group">
-                            <%= text_field_tag("link","")%>
-                        </div>
-                        <div id="submit">
-                            <%= submit_tag("Submit") %>
-                        </div>
-                    <% end %>
+<div class="jumbotron vertical-center">
+    <div class="home_callout text-center container-fluid">
+        <h1>Welcome to EasyRead!</h1>
+    </div>
+    
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">Your JLPT resource for web articles.</h3>
+                <!-- URL Form submission -->
+                <div class="well">
+                        <%= form_tag(:action => "getURLText") do %>
+                            <div class="form-group">
+                                <%= text_field_tag("link","")%>
+                            </div>
+                            <div id="submit">
+                                <%= submit_tag("Submit") %>
+                            </div>
+                        <% end %>
+                </div>
+                <!-- end URL Form Submission -->
+                
             </div>
-            <!-- end URL Form Submission -->
-            
         </div>
     </div>
-</div>
-
-<div class="container">
     
+    <div class="container">
+        
+    </div>
 </div>
