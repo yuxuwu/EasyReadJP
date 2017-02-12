@@ -58,7 +58,7 @@ class PagesController < ApplicationController
             jlpt_level = jlpt[1]
             jlpt_sum = jlpt_sum + jlpt_level.to_f
         end
-        average_score = (jlpt_sum/2000) * 100
+        average_score = (jlpt_sum/1000) * 100
         puts average_score
         params[:average] = average_score
         
