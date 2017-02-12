@@ -17,6 +17,8 @@ class PagesController < ApplicationController
     
     def getURLText
         
+        jlpt_sum = 0;
+        
         puts "begin scraping"
         @link = params[:link]
         all_data = Nokogiri::HTML(open("#{@link}"))
@@ -26,14 +28,20 @@ class PagesController < ApplicationController
         #Create a new array of all kanji characters
         kanjiCharacters = Array.new
         all_data_text.split('').each do |c|
-            c = c.ord
-#            puts c
-            if(c >= 0x4e00 && c<= 0x9faf)
-#                puts "Comparison success"
+            if(c.ord >= 0x4e00 && c.ord <= 0x9faf)
                 kanjiCharacters.push(c)
             end
         end
         puts kanjiCharacters.length
+        
+        25.times do |n|
+            char_uni = kanjiCharacters[n]
+            url_string = URI::encode(char_uni)
+            jisho_page = Nokogiri::HTML(open("http://jisho.org/search/#{url_string}%23kanji"))
+            jlpt = jisho_page.css('.jlpt>strong').text
+            jlpt_level = jlpt[1]
+            jlpt_sum = jlpt_sum + jlpt_level
+        end
         
     end
     
