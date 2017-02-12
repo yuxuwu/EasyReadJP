@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211194802) do
+ActiveRecord::Schema.define(version: 20170212022655) do
+
+  create_table "links", force: :cascade do |t|
+    t.string "url"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "url"
+  end
 
   create_table "texts", force: :cascade do |t|
   end
