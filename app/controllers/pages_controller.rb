@@ -50,15 +50,26 @@ class PagesController < ApplicationController
             end
         end
         
-        50.times do |n|
+        100.times do |n|
             char_uni = kanjiCharacters[n]
             url_string = URI::encode(char_uni)
             jisho_page = Nokogiri::HTML(open("http://jisho.org/search/#{url_string}%23kanji"))
             jlpt = jisho_page.css('.jlpt>strong').text
             jlpt_level = jlpt[1]
-            jlpt_sum = jlpt_sum + jlpt_level.to_f
+            puts case jlpt_level.to_i
+                when 5
+                    jlpt_sum += 1.0
+                when 4
+                    jlpt_sum += 5.0
+                when 3
+                    jlpt_sum += 10.0
+                when 2
+                    jlpt_sum += 15.0
+                when 1
+                    jlpt_sum += 20.0
+            end
         end
-        average_score = (jlpt_sum/1000) * 100
+        average_score = (jlpt_sum.to_f/2000) * 100
         puts average_score
         params[:average] = average_score
         
